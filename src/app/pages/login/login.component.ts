@@ -40,28 +40,45 @@ export class LoginComponent {
 
   ngOnInit(): void {}
 
-  OnSubmit() {
+  async OnSubmit() {
     let values = this.authForm.value;
     console.log("infor", values);
 
     if (this.authForm.valid) {
       this.loginService.login(values).subscribe(
-        (data) => {
+        async (data) => {
           /*Cas de succes*/
+          console.log(data);
+
           this.token = data.body;
           localStorage.setItem("token", "Bearer " + this.token);
           /*A chaque fois on besoin du token */
           localStorage.getItem("token");
           const tokenInfo = this.getDecodedAccessToken(this.token);
+          console.log(tokenInfo);
+
           console.log("tokenInfo", tokenInfo);
           localStorage.setItem("role", tokenInfo.roles[0].authority);
           localStorage.setItem("mail", tokenInfo.sub);
+          localStorage.setItem("userData", JSON.stringify(tokenInfo));
           console.log(tokenInfo);
+          const res = await this.loginService
+            .getUserID(tokenInfo.sub, "employee")
+            .toPromise();
+          console.log(res);
 
-          if (tokenInfo.roles[0].authority === "Employee")
+          localStorage.setItem("userID", res);
+          if (tokenInfo.roles[0].authority === "Employee") {
             this.router.navigate(["customers"]);
-          else if (tokenInfo.roles[0].authority === "Customer") {
+            const res = await this.loginService
+              .getUserID(tokenInfo.sub, tokenInfo.roles[0].authority)
+              .toPromise();
+          } else if (tokenInfo.roles[0].authority === "Customer") {
             this.router.navigate(["profile/projects"]);
+            // const res = await this.loginService
+            //   .getUserID(tokenInfo.sub, "customer")
+            //   .toPromise();
+            // console.log(res);
           }
           console.log(this.token);
           console.log(data);

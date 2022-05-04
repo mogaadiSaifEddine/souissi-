@@ -22,15 +22,7 @@
             [(ngModel)]="credit.amountCredit"
           />
         </div>
-        <div class="form-group">
-          <label class="control-label">Amount Remaining Credit : </label>
-          <input
-            class="form-control"
-            type="text"
-            name="descriptionBank"
-            [(ngModel)]="credit.amountRemainingCredit"
-          />
-        </div>
+
         <div class="form-group">
           <label class="control-label">Start Date : </label>
           <input
@@ -126,7 +118,7 @@
   <div class="row mb-1">
     <div class="col">
       <div class="input-group-append mb-3 box-shadow">
-        <div class="input-group-append">
+        <div *ngIf="userRole === 'Customer'" class="input-group-append">
           <span
             (click)="open(content)"
             class="input-group-text border-top-0 border-right-0 border-bottom-0"
@@ -224,21 +216,49 @@
         {{ value }}
       </ng-template>
     </ngx-datatable-column>
+    <ngx-datatable-column name="Statut Credit">
+      <ng-template ngx-datatable-cell-template let-value="value">
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Verification Credit">
+      <ng-template ngx-datatable-cell-template let-value="value">
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Traitement Credit">
+      <ng-template ngx-datatable-cell-template let-value="value">
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+
     <ngx-datatable-column *ngIf="userRole === 'Employee'" name="Actions">
       <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
         <td class="align-middle">
           <div class="btn-group" role="group">
             <button
-              class="btn btn-secondary btn-sm"
+              class="btn btn-secondary ml-2 btn-sm"
               (click)="open2(content2, row)"
             >
               <i class="fa fa-pencil"></i>
             </button>
             <button
-              class="btn btn-secondary btn-sm"
+              class="btn btn-secondary ml-2 btn-sm"
               (click)="deleteCredit(row.idCredit)"
             >
               <i class="fa fa-trash"></i>
+            </button>
+            <button
+              class="btn btn-secondary ml-2 btn-sm"
+              (click)="verifCredit(row.idCredit)"
+            >
+              <i class="fa fa-asl-interpreting"></i>
+            </button>
+            <button
+              class="btn btn-secondary ml-2 btn-sm"
+              (click)="closeCredit(row.idCredit)"
+            >
+              <i class="fa fa-window-close-o"></i>
             </button>
           </div>
         </td>

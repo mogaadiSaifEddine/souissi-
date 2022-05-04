@@ -28,10 +28,10 @@ export class CreditService {
 
   /////////////////////////////////////////VERIFICATION CREDIT////////////////////////////////////////////
 
-  verifCredit(idCustomerAccount: number, idCredit: number): Observable<string> {
+  verifCredit(idCredit: number): Observable<string> {
     return this.httpClient.put<string>(
-      this.apiURL + "/confirm-credit/" + idCustomerAccount + "/" + idCredit,
-      idCustomerAccount
+      this.apiURL + "/confirm-credit/" + idCredit,
+      ""
     );
   }
 

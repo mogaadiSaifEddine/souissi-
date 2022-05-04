@@ -43,4 +43,9 @@ export class LoginService {
       "http://localhost:8087/PIDEV_GARANTIA/customerInfo/{mail}"
     );
   }
+  getUserID(email: string, type: string): Observable<any> {
+    return this.http.get(
+      "http://localhost:8087/PIDEV_GARANTIA/user/" + email + "/" + type
+    );
+  }
 }

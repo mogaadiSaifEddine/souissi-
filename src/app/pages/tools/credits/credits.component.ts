@@ -17,7 +17,7 @@ export class CreditsComponent implements OnInit {
   credit: Credit = new Credit();
   cr: any;
   closeResult = "";
-  idrec: number;
+  idrec: number | null = null;
   idc: number;
   temp = [];
   userRole;
@@ -33,16 +33,18 @@ export class CreditsComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRole = localStorage.getItem("role");
-    this.idc = JSON.parse(localStorage.getItem("userData")).id;
+    this.idc = JSON.parse(localStorage.getItem("userID"));
     this.getAllCredits();
   }
   closeModal() {
     this.modalService.dismissAll();
   }
   getAllCredits() {
-    true
+    this.userRole === "Employee"
       ? this.creditService.retrieveAllCredits().subscribe(
           (data) => {
+            console.log(data);
+
             this.cr = data.map((credit) => {
               let lastDueDate = this.datepipe.transform(
                 credit.lastDueDate,
@@ -64,6 +66,7 @@ export class CreditsComponent implements OnInit {
         )
       : this.creditService.retrieveCreditByCustomer(this.idc).subscribe(
           (data) => {
+            console.log(data);
             this.cr = data.map((credit) => {
               let lastDueDate = this.datepipe.transform(
                 credit.lastDueDate,
@@ -93,7 +96,7 @@ export class CreditsComponent implements OnInit {
     this.table.offset = 0;
   }
   saveCredit() {
-    console.log(typeof this.credit.lastDueDate);
+    console.log(typeof this.credit.traitementCredit);
 
     this.creditService.requestCreditCustomer(this.credit, this.idc).subscribe(
       (data) => {
@@ -116,6 +119,30 @@ export class CreditsComponent implements OnInit {
         },
         (err) => {
           console.log(err);
+        }
+      );
+  }
+  verifCredit(id: number) {
+    console.log(id);
+    if (confirm("Are you sure you want to verify this credit?"))
+      this.creditService.verifCredit(id).subscribe(
+        (data) => {
+          this.getAllCredits();
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+  }
+  closeCredit(id: number) {
+    console.log(id);
+    if (confirm("Are you sure you want to close this credit?"))
+      this.creditService.closeCredit(id).subscribe(
+        (data) => {
+          this.getAllCredits();
+        },
+        (err) => {
+          console.log(err.error.text);
         }
       );
   }
