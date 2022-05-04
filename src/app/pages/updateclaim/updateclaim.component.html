@@ -1,0 +1,72 @@
+<p>updateclaim works!</p>
+<div class="col-lg-8 order-first  ">
+    <div widget class="card border-0 box-shadow">
+        <div class="card-header transparent border-0 text-muted ">
+                        <div class="card-body pt-0 widget-body "> 
+                            <p class="text-muted">Please fill out the form below, customer service will get back to you as soon as possible.</p>
+
+                        <!-- <p class="text-left fs-13 text-gray">Basic Form Input with diffrent elements and styles.</p> -->               
+                                <div class="relative w-full mb-3">
+                                <label
+                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password"
+                                >
+                                Contract Type
+                                </label><br>	
+                                <!-- automobile,vie,Habitation,epargne,Retraite,Chefdefamille,Santé,avenirdemesenfants,materielinformatique; -->
+
+                                <select id="exampleSelect1" [(ngModel)]="claim.claim_contrat_type" class="form-control">
+                                    <option>automobile</option>
+                                    <option>vie</option>
+                                    <option>Habitation</option>
+                                    <option>epargne</option>
+                                    <option>Retraite</option>
+                                    <option>Chefdefamille</option>
+                                    <option>Santé</option>
+                                    <option>avenirdemesenfants</option>
+                                    <option>materielinformatique</option>
+                                    
+                                </select>
+                                   
+                                </div>
+                                {{claim.claim_contrat_type}}
+                                <div class="relative w-full mb-3">
+
+                                <label
+                                    class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password"
+                                >
+                                Claim Type
+                                </label><br>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-primary">
+                                        <input type="radio" name="options" id="option1" autocomplete="off" [(ngModel)]="claim.claim_type" value="Reclamation"> Reclamation
+                                    </label>
+                                    <label class="btn btn-primary active">
+                                        <input type="radio" name="options" id="option2" autocomplete="off" checked [(ngModel)]="claim.claim_type" value="Complaint"> Complaint
+                                    </label>
+                                </div>
+                                {{claim.claim_type}}<br>
+
+                                <div class="relative w-full mb-3">
+                                    <label
+                                        class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password"
+                                    >
+                                    Message
+                                    </label>
+                                    <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control" placeholder="Content.." [(ngModel)]="claim.claim_description"></textarea>
+                                </div>
+                                {{claim.claim_description}}<br>
+                                <input type="text" id="input-1" class="form-control" [(ngModel)]="id">
+                                {{id}}
+                                <button type="button" class="btn btn-success btn-rounded w-100p mb-1 mr-1" routerLink="/claim">Retour</button>                
+                                
+           
+
+                            </div>
+    </div>
+    </div>
+</div>
+
+</div>

@@ -1,0 +1,154 @@
+<!--
+<div class="row">
+    <div class="col-md-12">
+        <div class="Card" class="text-center">
+            <table class="table">
+                <thead style="background-color: rgb(192,183,183);">
+                    <th>ID</th>
+                    <th>First name</th>
+                    <th>Last name</th>
+                    <th>Birth date</th>
+                    <th>Phone number</th>
+                    <th>CIN</th>
+                    <th>Gender</th>
+                    <th>Monthly income</th>
+                    <th>Job</th>
+                    <th>Governorate</th>
+                    <th>Email</th>
+                    <th>Action</th>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of listCustomers">
+                        <td>{{p.id_customer}}</td>
+                        <td>{{p.birthDate}}</td>
+                        <td>{{p.firstName}}</td>
+                        <td>{{p.lastName }}</td>
+                        <td>{{p.phoneNumber}}</td>
+                        <td>{{p.cin }}</td>
+                        <td>{{p.gender}} </td>
+                        <td>{{p.monthlyIncome }}</td>
+                        <td>{{p.job }}</td>
+                        <td>{{p.governorate }}</td>
+                        <td>{{p.email }}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary"
+                                    (click)="editCustomer(mymodal)">edit</button>
+                            <ng-template #mymodal let-modal>
+                            </ng-template>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+-->
+<dx-data-grid
+        id="gridCustomers"
+        [dataSource]="listCustomers"
+        keyExpr="idCustomer"
+        (onRowInserting)="add($event)"
+        (onRowUpdating)="update($event)"
+        (onRowRemoved)="delete($event)"
+        [allowColumnReordering]="true"
+        [allowColumnResizing]="true"
+        [showBorders]="true"
+        [rowAlternationEnabled]="true"
+        [columnMinWidth]="20"
+        [columnAutoWidth]="false"
+        (onToolbarPreparing)="onToolbarPreparing($event)"
+
+
+>
+    <dxo-paging [enabled]="false"></dxo-paging>
+    <dxo-editing
+            mode="popup"
+            [allowUpdating]="true"
+            [allowAdding]="false"
+            [allowDeleting]="false"
+            [useIcons]="true"
+    >
+<!--        <dxo-popup8-->
+<!--                title="Employee Info"-->
+<!--                [showTitle]="true"-->
+<!--                [width]="700"-->
+<!--                [height]="525"-->
+<!--        >-->
+<!--        </dxo-popup8>-->
+<!--        <dxo-form>-->
+<!--            <dxi-item itemType="group" [colCount]="2" [colSpan]="2">-->
+<!--                <dxi-item dataField="FirstName"></dxi-item>-->
+<!--                <dxi-item dataField="LastName"></dxi-item>-->
+<!--                <dxi-item dataField="Prefix"></dxi-item>-->
+<!--                <dxi-item dataField="BirthDate"></dxi-item>-->
+<!--                <dxi-item dataField="Position"></dxi-item>-->
+<!--                <dxi-item dataField="HireDate"></dxi-item>-->
+<!--                <dxi-item-->
+<!--                        dataField="Notes"-->
+<!--                        editorType="dxTextArea"-->
+<!--                        [colSpan]="2"-->
+<!--                        [editorOptions]="{ height: 100 }"-->
+<!--                >-->
+<!--                </dxi-item>-->
+<!--            </dxi-item>-->
+
+<!--            <dxi-item-->
+<!--                    itemType="group"-->
+<!--                    caption="Home Address"-->
+<!--                    [colCount]="2"-->
+<!--                    [colSpan]="2"-->
+<!--            >-->
+<!--                <dxi-item dataField="StateID"></dxi-item>-->
+<!--                <dxi-item dataField="Address"></dxi-item>-->
+<!--            </dxi-item>-->
+<!--        </dxo-form>-->
+    </dxo-editing>
+
+    <dxo-column-chooser [enabled]="true"></dxo-column-chooser>
+    <dxo-export [enabled]="true" fileName="Customers" [allowExportSelectedData]="true"></dxo-export>
+    <dxo-selection mode="multiple" ></dxo-selection>
+    <dxo-filter-row [visible]="true"  [applyFilter]="true"></dxo-filter-row>
+      <dxo-search-panel [visible]="true" [width]="240" placeholder="Search"  ></dxo-search-panel>
+    <dxo-load-panel [enabled]="true"></dxo-load-panel>
+    <dxi-column dataField="idCustomer" caption="Id"  dataType="number"  [visible]="false" [allowEditing]="false"></dxi-column>
+    <dxi-column dataField="birthDate"  dataType="date"></dxi-column>
+    <dxi-column dataField="firstName"></dxi-column>
+    <dxi-column dataField="lastName" > </dxi-column>
+    <dxi-column dataField="phoneNumber"  dataType="string"> </dxi-column>
+    <dxi-column dataField="cin" dataType="string"> </dxi-column>
+    <dxi-column dataField="gender" caption="gender" dataType="string"></dxi-column>
+    <dxi-column dataField="monthlyIncome"  caption="monthlyIncome" dataType="string" > </dxi-column>
+    <dxi-column dataField="job"  caption="job" dataType="string"></dxi-column>
+        <dxi-column dataField="governorate"  caption="governorate" dataType="string" > </dxi-column>
+        <dxi-column dataField="email"  caption="email" dataType="string"></dxi-column>
+
+    <dxi-column type="buttons" [width]="110">
+        <dxi-button name="edit"></dxi-button>
+        <dxi-button
+                hint="Activé"
+                icon="key"
+                [onClick]="iconClick"
+        ></dxi-button>
+    </dxi-column>
+    </dx-data-grid>
+<div class="col-12 mb-4">
+    <div widget class="card border-0 box-shadow">
+        <div class="card-header transparent border-0 text-muted">
+            <h5 class="mb-0">Pie Grid Chart</h5>
+            <div class="widget-controls">
+                <a data-widgster="expand" href="#" class="transition"><i class="fa fa-chevron-down"></i></a>
+                <a data-widgster="collapse" href="#" class="transition"><i class="fa fa-chevron-up"></i></a>
+                <a data-widgster="close" href="#" class="transition"><i class="fa fa-times"></i></a>
+            </div>
+        </div>
+        <div class="card-body widget-body">
+            <div class="w-100 h-300p">
+                <ngx-charts-pie-grid *ngIf="single!=[]"
+                        [scheme]="colorScheme"
+                        [results]="single"
+                        (select)="onSelect($event)">
+                </ngx-charts-pie-grid>
+            </div>
+        </div>
+    </div>
+</div>  

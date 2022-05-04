@@ -1,0 +1,253 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Agent</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div>
+        <div class="form-group">
+          <label class="control-label">Firstname : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="firstname"
+            [(ngModel)]="agent.firstName"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">LastName : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="lastname"
+            [(ngModel)]="agent.lastName"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Email : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="email"
+            [(ngModel)]="agent.email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Phone number : </label>
+          <input
+            name="phone"
+            class="form-control"
+            type="number"
+            [(ngModel)]="agent.phoneAgent"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Adress : </label>
+          <input
+            name="adress"
+            class="form-control"
+            type="text"
+            [(ngModel)]="agent.addressAgent"
+            required
+          />
+        </div>
+        <label for="bank-select">Choose a BANK:</label>
+
+        <div class="form-group">
+          <select #selected class="form-control" required>
+            <option
+              *ngFor="let c of bk"
+              #Origin
+              [(ngModel)]="bk"
+              value="{{ c.idBank }}"
+            >
+              {{ c.nameBank }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="saveAgent(selected.value)"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Agent</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div>
+        <div class="form-group">
+          <label class="control-label">Firstname : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="firstname"
+            required
+            [(ngModel)]="agent.firstName"
+            [ngModelOptions]="{ standalone: true }"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">LastName : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="lastname"
+            required
+            [(ngModel)]="agent.lastName"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Email : </label>
+          <input
+            class="form-control"
+            type="email"
+            name="email"
+            [(ngModel)]="agent.email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Phone number : </label>
+          <input
+            name="phone"
+            class="form-control"
+            type="number"
+            [(ngModel)]="agent.phoneAgent"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Adress : </label>
+          <input
+            name="adress"
+            class="form-control"
+            type="text"
+            [(ngModel)]="agent.addressAgent"
+            required
+          />
+        </div>
+        <label for="bank-select"> BANK:</label>
+
+        <div class="form-group">
+          <span class="form-control" disabled>
+            {{ agent.bankAgent.nameBank }}</span
+          >
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="updateAgent()">
+      update
+    </button>
+  </div>
+</ng-template>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Agent List</h2>
+  </div>
+</div>
+
+<div class="row mb-1">
+  <div class="col">
+    <div class="input-group-append mb-3 box-shadow">
+      <div class="input-group-append">
+        <span
+          (click)="open(content)"
+          class="input-group-text border-top-0 border-right-0 border-bottom-0"
+          ><i class="fa fa-user-plus"></i
+        ></span>
+      </div>
+      <input
+        type="text"
+        [(ngModel)]="searchText"
+        placeholder="Search Agent ..."
+        class="form-control border-0"
+      />
+    </div>
+  </div>
+</div>
+<div class="col-13">
+  <div class="table-responsive bg-white box-shadow">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th scope="col">First Name</th>
+          <th scope="col">Last Name</th>
+          <th scope="col">Email</th>
+          <th scope="col">Address</th>
+          <th scope="col">Phone</th>
+          <th scope="col">Bank</th>
+          <th scope="col">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of ag; let i = index" class="col-xl-4 col-lg-6 mb-4">
+          <td>{{ c.firstName }}</td>
+          <td>{{ c.lastName }}</td>
+          <td>{{ c.email }}</td>
+          <td>{{ c.addressAgent }}</td>
+          <td>{{ c.phoneAgent }}</td>
+          <td>{{ c.bankAgent.nameBank }}</td>
+
+          <td class="align-middle">
+            <div class="btn-group" role="group">
+              <button
+                class="btn btn-secondary btn-sm"
+                (click)="open2(content2, c)"
+              >
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button class="btn btn-secondary btn-sm" (click)="deleteAgent(c)">
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<br />
+<div widget class="card border-0 box-shadow">
+  <div class="col-12">
+    <div class="bg-white text-center">
+      <!-- <pagination-controls
+        autoHide="true"
+        (pageChange)="p = $event"
+        maxSize="3"
+      ></pagination-controls> -->
+    </div>
+  </div>
+</div>
+<br />

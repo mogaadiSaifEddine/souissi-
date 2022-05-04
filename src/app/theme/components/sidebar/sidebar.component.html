@@ -1,0 +1,10 @@
+<div class="sidebar-outer">
+    <!-- display: block;margin:auto; -->
+    <a class="logo d-flex align-items-center py-4" routerLink="/" (click)="closeSubMenus()" *ngIf="settings.theme.sidebarIsFixed">
+        <span class="start" style="
+        font-size: 30px;
+        color:#73c000;
+        font-weight: 700;"> Garantía</span><span class="ng"><img src="\assets\img\logo\logoGarantiaaa.png" alt="" height="40%" width="45%"></span>
+    </a>
+    <app-vertical-menu [menuItems]="menuItems"></app-vertical-menu>    
+</div>

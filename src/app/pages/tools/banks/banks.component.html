@@ -1,0 +1,285 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Bank</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div>
+        <div class="form-group">
+          <label class="control-label"
+            >Name (This fieled must be unique) :
+          </label>
+          <input
+            class="form-control"
+            type="text"
+            name="nameBank"
+            [(ngModel)]="bank.nameBank"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Description : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="descriptionBank"
+            [(ngModel)]="bank.descriptionBank"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Adress : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="Adress"
+            [(ngModel)]="bank.adresseBank"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Taux Moyen Du Marche : </label>
+          <input
+            name="tmm"
+            class="form-control"
+            type="text"
+            [(ngModel)]="bank.tauxMoyenDuMarche"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Marge Interet Bank : </label>
+          <input
+            name="mib"
+            class="form-control"
+            type="text"
+            [(ngModel)]="bank.margeInteretBank"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-gray w-100p mb-1 mr-1"
+      (click)="saveBank()"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Update Bank</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div>
+        <div class="form-group">
+          <label class="control-label">Name : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="Name"
+            [(ngModel)]="bank.nameBank"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Description : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="Description"
+            [(ngModel)]="bank.descriptionBank"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Adress : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="Adress"
+            [(ngModel)]="bank.adresseBank"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Taux Moyen Du Marche : </label>
+          <input
+            name="tmm"
+            class="form-control"
+            type="text"
+            [(ngModel)]="bank.tauxMoyenDuMarche"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Marge Interet Bank : </label>
+          <input
+            name="mib"
+            class="form-control"
+            type="text"
+            [(ngModel)]="bank.margeInteretBank"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="updateBank()">
+      Update
+    </button>
+  </div>
+</ng-template>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Bank List</h2>
+  </div>
+
+  <div class="row mb-1">
+    <div class="col">
+      <div class="input-group-append mb-3 box-shadow">
+        <div class="input-group-append" *ngIf="userRole === 'Employee'">
+          <span
+            (click)="open(content)"
+            class="input-group-text border-top-0 border-right-0 border-bottom-0"
+            ><i class="fa fa-plus"></i
+          ></span>
+        </div>
+        <input
+          type="text"
+          placeholder="Search Bank..."
+          class="form-control border-0"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="table-responsive bg-white box-shadow">
+    <table class="table">
+      <thead class="thead-light">
+        <tr>
+          <th>Nom</th>
+          <th>Description</th>
+          <th>Adresse</th>
+          <th>Taux Moyen Du Marche</th>
+          <th>Marge Interet Bank</th>
+
+          <th *ngIf="userRole === 'Employee'">action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of bk" class="col-xl-4 col-lg-6 mb-4">
+          <td>{{ c.nameBank }}</td>
+          <td>{{ c.descriptionBank }}</td>
+          <td>{{ c.adresseBank }}</td>
+          <td>{{ c.tauxMoyenDuMarche }}</td>
+          <td>{{ c.margeInteretBank }}</td>
+          <td *ngIf="userRole === 'Employee'" class="align-middle">
+            <div class="btn-group" role="group">
+              <button
+                class="btn btn-secondary btn-sm"
+                (click)="open2(content2, c)"
+              >
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button
+                class="btn btn-secondary btn-sm"
+                (click)="deleteBank(c.idBank)"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+          <!-- <td>
+            <button (click)="deleteBank(c.idBank)" class="btn btn-danger">
+              Delete
+            </button>
+            <button
+              style="margin-left: 20px"
+              class="btn btn-success"
+              (click)="open2(content2, c)"
+            >
+              Update
+            </button>
+          </td> -->
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <ngx-datatable
+    #table
+    class="material"
+    [headerHeight]="40"
+    [limit]="10"
+    [columnMode]="'force'"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [rows]="bk"
+    [selectionType]="'checkbox'"
+  >
+    <ngx-datatable-column
+      [width]="30"
+      [sortable]="false"
+      [canAutoResize]="false"
+      [draggable]="true"
+      [resizeable]="false"
+      [headerCheckboxable]="false"
+      [checkboxable]="false"
+    >
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Name">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Amount Remaining Credit">
+      <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+        <span title="Double click to edit">
+          {{ value }}
+        </span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Start Date">
+      <ng-template ngx-datatable-cell-template let-value="value">
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Last Due Date">
+      <ng-template ngx-datatable-cell-template let-value="value">
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column *ngIf="userRole === 'Employee'" name="Actions">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        <td class="align-middle">
+          <div class="btn-group" role="group">
+            <button
+              class="btn btn-secondary btn-sm"
+              (click)="open2(content2, row)"
+            >
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button
+              class="btn btn-secondary btn-sm"
+              (click)="deleteBank(row.idBank)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>

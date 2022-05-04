@@ -1,0 +1,229 @@
+<div class="d-flex justify-content-center align-items-center w-100 h-100 register-container">
+    <div class="col-xl-4 col-md-6 col-10">
+        <div class="card border-0 box-shadow rounded-0">
+            <div class="card-header d-flex justify-content-center align-items-center border-0 box-shadow">
+                <i class="fa fa-registered" aria-hidden="true"></i>
+            </div>
+            <div class="card-body text-center pb-1">
+                <h2>Register member</h2>
+                <a routerLink="/login" class="transition">Already have an account? Sign in!</a>
+                <style type="text/css">
+                    label{
+                        width: 100px;
+                        display: inline-block;
+                    }
+                    .button
+                    {
+                        font-size: 13px;
+                        color:black;
+                    }
+                </style>
+                <form [formGroup]="registrationForm">
+
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            First name
+                        </label>
+                        <input formControlName="firstName"
+                               type="text"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                               placeholder="First name"
+                        />
+                    </div>
+
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            Last name
+                        </label>
+                        <input formControlName="lastName"
+                               type="text"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                               placeholder="Last name"
+                        />
+                    </div>
+
+
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            Phone number
+                        </label>
+                        <input formControlName="phoneNumber"
+                               type="number"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                               placeholder="Phone number"
+                        />
+                    </div>
+
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            Governorate
+                        </label>
+                        <select formControlName="governorate" class="form-select" aria-label="Default select example" name="governorates">
+                            <option value="">--Please choose an option--</option>
+                            <option value="Ariana">Ariana</option>
+                            <option value="Beja">Beja</option>
+                            <option value="BenArous">Ben Arous</option>
+                            <option value="Bizerte">Bizerte</option>
+                            <option value="Gabes">Gabes</option>
+                            <option value="Gafsa">Gafsa</option>
+                            <option value="Jendouba">Jendouba</option>
+                            <option value="Kairouan">Kairouan</option>
+                            <option value="Kasserine">Kasserine</option>
+                            <option value="Kebili">Kebili</option>
+                            <option value="Manouba">Manouba</option>
+                            <option value="Kef">Kef</option>
+                            <option value="Mahdia">Mahdia</option>
+                            <option value="Medenine">Medenine</option>
+                            <option value="Monastir">Monastir</option>
+                            <option value="Nabeul">Nabeul</option>
+                            <option value="Sfax">Sfax</option>
+                            <option value="SidiBouzid">Sidi Bouzid</option>
+                            <option value="Siliana">Siliana</option>
+                            <option value="Sousse">Sousse</option>
+                            <option value="Tataouine">Tataouine</option>
+                            <option value="Tozeur">Tozeur</option>
+                            <option value="Tunis">Tunis</option>
+                            <option value="Zaghouan">Zaghouan</option>
+                        </select>
+                    </div>
+
+
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            National ID card
+                        </label>
+                        <input formControlName="cin"
+                               type="number"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                               placeholder="CIN"
+                        />
+                    </div>
+
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            Job
+                        </label>
+                        <input formControlName="job"
+                               type="text"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                               placeholder="Current job"
+                        />
+                    </div>
+
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            Monthly income
+                        </label>
+                        <input formControlName="monthlyIncome"
+                               type="number"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                               placeholder="Monthly income in dinars"
+                        />
+                    </div>
+
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            Birth date
+                        </label>
+                        <input formControlName="birthDate"
+                               type="date"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        />
+                    </div>
+
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            Gender
+                        </label>
+                        <select formControlName="gender" class="form-select" aria-label="Default select example" name="gender" >
+                            <option value="">--Please choose an option--</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            Email
+                        </label>
+                        <input formControlName="email"
+                               type="email"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                               placeholder="Email"
+                        />
+                    </div>
+
+                    <div class="relative w-full mb-3">
+                        <label
+                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                htmlFor="grid-password"
+                        >
+                            Password
+                        </label>
+                        <input formControlName="password"
+                               type="password"
+                               class="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                               placeholder="Password"
+                        />
+                    </div>
+
+                    <div>
+                        <label class="inline-flex items-center cursor-pointer">
+                            <input
+                                    id="customCheckLogin"
+                                    type="checkbox"
+                                    class="form-checkbox border-0 text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150 rounded"
+                            />
+                            <span class="ml-2 text-sm font-semibold text-blueGray-600">
+                  I agree with the
+                  <a href="javascript:void(0)" class="text-red-600">
+                    Privacy Policy
+                  </a>
+                </span>
+                        </label>
+                    </div>
+
+                    <div class="text-center mt-6">
+                        <button (click)="RegisterCustomer()"
+                                class="bg-blueGray-800 text-black active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                                type="button"
+
+                        >
+                            Create Account
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

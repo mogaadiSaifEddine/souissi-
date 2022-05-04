@@ -1,0 +1,304 @@
+<!-- <p>claims-employee works!</p>
+<button type="button" class="btn btn-info btn-rounded w-100p mb-1 mr-1"routerLink="/claims">Retour</button>
+<div class="row">
+    <div class="card" class="text-center">
+        <table class="table">
+            <thead style="background-color: rgb(192, 183, 183);">
+                <th>claim_id</th>
+                <th>claim_description</th>
+                <th>claim_state</th>
+                <th>claim_type</th>
+                <th>claim_contrat_type</th>
+                <th>claim_visibility</th>
+                <th>claim_date</th>
+            </thead>
+            <tbody>
+                <tr *ngFor='let p of listClaims'>
+                    <td>{{p.claim_id}}</td>
+                    <td>{{p.claim_description}}</td>
+                    <td>{{p.claim_state}}</td>
+                    <td>{{p.claim_type}}</td>
+                    <td>{{p.claim_contrat_type}}</td>
+                    <td>{{p.claim_visibility}}</td>
+                    <td>{{p.claim_date}}</td>
+                    <td><button type="button" class="btn btn-outline-primary"  (click)="open(mymodal)" routerLink="/updateclaim">edit</button>
+                        <ng-template #mymodal let-modal>
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+                                <button type="button" class="close" aria-label="Close"
+                                    >
+                                    <span aria-hidden="true" >×</span>
+
+                                </button>
+
+                            </div>
+                            <div>
+                            <form>
+                                <div class="modal-body">
+
+                                    <div class="row" class="col-md-5">
+                                        <label>id</label>
+                                        <input type="text" [(ngModel)]="claim.claim_id" [ngModelOptions]="{standalone : true}" />
+                                    </div>
+                                    <div class="row" class="col-md-5">
+                                        <label>claim description</label>
+                                        <input type="number" [(ngModel)]="claim.claim_description" [ngModelOptions]="{standalone : true}" />
+                                    </div>
+                                    <div class="row" class="col-md-5">
+                                        <label>claim state</label>
+                                        <input type="number" [(ngModel)]="claim.claim_state" [ngModelOptions]="{standalone : true}" />
+                                    </div>
+                                    <div class="row" class="col-md-5">
+                                        <label>claim type</label>
+                                        <input type="text" [(ngModel)]="claim.claim_type" [ngModelOptions]="{standalone : true}" />
+                                    </div>
+                                    <div class="row" class="col-md-5">
+                                        <label> contrat type</label>
+                                        <input type="number" [(ngModel)]="claim.claim_contrat_type" [ngModelOptions]="{standalone : true}" />
+                                    </div>
+                                    <div class="row" class="col-md-5">
+                                        <label>claim visibility</label>
+                                        <input type="number" [(ngModel)]="claim.claim_visibility" [ngModelOptions]="{standalone : true}" />
+                                    </div>
+                                    <div class="row" class="col-md-5">
+                                        <label>claim date</label>
+                                        <input type="number" [(ngModel)]="claim.claim_date" [ngModelOptions]="{standalone : true}" />
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+
+                                    <button type="button" class="btn btn-info">Cancel</button>
+                                    <button class="btn btn-success">Validate</button>
+                                </div>
+                            </form>
+                        </div>
+                        </ng-template>
+                        <button type="button" class="btn btn-info"
+                        (click)="modal.close('Save click')" (click)="cancel()">Cancel</button>
+                    <button class="btn btn-success"(click)="editClaim(p)" (click)="modal.close('Save click')">Validate</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>-->
+<div class="row">
+    <div class="row">
+        <div class="col-md-12">
+            <button class="btn btn-round btn-sm btn-success" (click)="open(mymodal1)">Add new Claim</button>
+            <br><br>
+            <ng-template #mymodal1 let-modal1>
+                <div class="modal-header">
+                    <h4 class="modal-title" id="modal-basic-title">Add new claim</h4>
+                    <button type="button" class="close" aria-label="Close" (click)="modal1.dismiss('Cross click')">
+                        <span aria-hidden="true" (click)="cancel()">×</span>
+                    </button>
+
+                </div>
+                <div class="center">
+                    <form>
+                        <div class="card-body pt-0 widget-body ">
+                            <p class="text-muted">Please fill out the form below, customer service will get back to you as
+                                soon as possible.</p>
+    
+                            <!-- <p class="text-left fs-13 text-gray">Basic Form Input with diffrent elements and styles.</p> -->
+                            <div class="relative w-full mb-3">
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password">
+                                    Contract Type
+                                </label><br>
+                                <!-- automobile,vie,Habitation,epargne,Retraite,Chefdefamille,Santé,avenirdemesenfants,materielinformatique; -->
+    
+                                <select id="exampleSelect1" [(ngModel)]="claim.claim_contrat_type" class="form-control">
+                                    <option>automobile</option>
+                                    <option>vie</option>
+                                    <option>Habitation</option>
+                                    <option>epargne</option>
+                                    <option>Retraite</option>
+                                    <option>Chefdefamille</option>
+                                    <option>Santé</option>
+                                    <option>avenirdemesenfants</option>
+                                    <option>materielinformatique</option>
+    
+                                </select>
+    
+                            </div>
+                            {{claim.claim_contrat_type}}
+                            <div class="relative w-full mb-3">
+    
+                                <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                    htmlFor="grid-password">
+                                    Claim Type
+                                </label><br>
+                                <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                    <label class="btn btn-primary">
+                                        <input type="radio" name="options" id="option1" autocomplete="off"
+                                            [(ngModel)]="claim.claim_type" value="Reclamation"> Reclamation
+                                    </label>
+                                    <label class="btn btn-primary active">
+                                        <input type="radio" name="options" id="option2" autocomplete="off" checked
+                                            [(ngModel)]="claim.claim_type" value="Complaint"> Complaint
+                                    </label>
+                                </div>
+                                {{claim.claim_type}}<br>
+    
+                                <div class="relative w-full mb-3">
+                                    <label class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        htmlFor="grid-password">
+                                        Message
+                                    </label>
+                                    <textarea id="textarea-input" name="textarea-input" rows="9" class="form-control"
+                                        placeholder="Content.." [(ngModel)]="claim.claim_description"></textarea>
+                                </div>
+                                {{claim.claim_description}}<br>
+                                <input type="text" id="input-1" class="form-control" [(ngModel)]="id">
+                                {{id}}
+                                <button type="button" (click)=" deleteClaim(id)"
+                                    class="btn btn-success btn-rounded w-100p mb-1 mr-1">Send</button>
+                                <button type="button" class="btn btn-info btn-rounded w-100p mb-1 mr-1"
+                                    routerLink="/claimscustomer">My Claims</button>
+                                <button type="button" class="btn btn-info btn-rounded w-100p mb-1 mr-1"
+                                    routerLink="/claimsemployee">Display claims</button>
+                                <button type="button" (click)="addclaim(claim)"
+                                    class="btn btn-success btn-rounded w-100p mb-1 mr-1">Send</button>
+                                <button type="button" class="btn btn-info btn-rounded w-100p mb-1 mr-1"
+                                    routerLink="/updateclaim">update claim</button>
+    
+    
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-success" (click)="addclaim(claim)"
+                            (click)="modal1.close('Save click')">Add</button>
+                        <button type="button" class="btn btn-info" (click)="modal1.close('Save click')">Cancel</button>
+                    </form>
+                </div>
+            </ng-template>
+            <div class="row">
+                <div class="card" class="text-center">
+                    <table class="table">
+                        <thead style="background-color: rgb(192, 183, 183);">
+                            <th>claim_id</th>
+                            <th>claim_description</th>
+                            <th>claim_state</th>
+                            <th>claim_type</th>
+                            <th>claim_contrat_type</th>
+                            <th>claim_visibility</th>
+                            <th>claim_date</th>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor='let p of listClaims'>
+                                <td>{{p.claim_id}}</td>
+                                <td>{{p.claim_description}}</td>
+                                <td>{{p.claim_state}}</td>
+                                <td>{{p.claim_type}}</td>
+                                <td>{{p.claim_contrat_type}}</td>
+                                <td>{{p.claim_visibility}}</td>
+                                <td>{{p.claim_date}}</td>
+                                <td><button type="button" class="btn btn-outline-primary"
+                                        (click)="open(mymodal)">edit</button>
+                                    <ng-template #mymodal let-modal>
+                                        <div class="modal-header">
+                                            <h4 class="modal-title" id="modal-basic-title">Edit</h4>
+                                            <button type="button" class="close" aria-label="Close"
+                                                (click)="modal.dismiss('Cross click')">
+                                                <span aria-hidden="true" (click)="cancel()">×</span>
+
+                                            </button>
+
+                                        </div>
+                                        <div>
+                                            <form>
+                                                <div class="modal-body">
+
+                                                    <div class="relative w-full mb-3">
+                                                        <label
+                                                            class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                            htmlFor="grid-password">
+                                                            Contract Type
+                                                        </label><br>
+                                                        <!-- automobile,vie,Habitation,epargne,Retraite,Chefdefamille,Santé,avenirdemesenfants,materielinformatique; -->
+
+                                                        <select id="exampleSelect1" [(ngModel)]="claim.claim_contrat_type" class="form-control">
+                                                            <option>automobile</option>
+                                                            <option>vie</option>
+                                                            <option>Habitation</option>
+                                                            <option>epargne</option>
+                                                            <option>Retraite</option>
+                                                            <option>Chefdefamille</option>
+                                                            <option>Santé</option>
+                                                            <option>avenirdemesenfants</option>
+                                                            <option>materielinformatique</option>
+
+                                                        </select>
+
+                                                    </div>
+                                                    {{claim.claim_contrat_type}}
+                                                    <div class="relative w-full mb-3">
+
+                                                        <label
+                                                            class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                            htmlFor="grid-password">
+                                                            Claim Type
+                                                        </label><br>
+                                                        <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                                            <label class="btn btn-primary">
+                                                                <input type="radio" name="options" id="option1"
+                                                                    autocomplete="off" [(ngModel)]="claim.claim_type"
+                                                                    value="Reclamation"> Reclamation
+                                                            </label>
+                                                            <label class="btn btn-primary active">
+                                                                <input type="radio" name="options" id="option2"
+                                                                    autocomplete="off" checked
+                                                                    [(ngModel)]="claim.claim_type" value="Complaint">
+                                                                Complaint
+                                                            </label>
+                                                        </div>
+                                                        {{claim.claim_type}}<br>
+
+                                                        <div class="relative w-full mb-3">
+                                                            <label
+                                                                class="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                                                htmlFor="grid-password">
+                                                                Message
+                                                            </label>
+                                                            <textarea id="textarea-input" name="textarea-input" rows="9"
+                                                                class="form-control" placeholder="Content.."
+                                                                [(ngModel)]="claim.claim_description"></textarea>
+                                                        </div>
+                                                        {{claim.claim_description}}<br>
+                                                        <input type="text" id="input-1" class="form-control"
+                                                            [(ngModel)]="id">
+                                                        {{id}}
+                                                        <!-- <button type="button" (click)=" deleteClaim(id)" class="btn btn-success btn-rounded w-100p mb-1 mr-1">Send</button>                
+                                                    <button type="button" class="btn btn-info btn-rounded w-100p mb-1 mr-1"routerLink="/claimscustomer">My Claims</button>
+                                                    <button type="button" class="btn btn-info btn-rounded w-100p mb-1 mr-1"routerLink="/claimsemployee">Display claims</button>
+                                                    <button type="button"  (click)="addclaim(claim)"class="btn btn-success btn-rounded w-100p mb-1 mr-1">Send</button> 
+                                                    <button type="button" class="btn btn-info btn-rounded w-100p mb-1 mr-1"routerLink="/updateclaim">update claim</button> -->
+
+
+                                                    </div>
+                                                </div>
+
+                                                <div class="modal-footer">
+
+                                                    <button type="button" class="btn btn-info"
+                                                        (click)="modal.close('Save click')"
+                                                        (click)="cancel()">Cancel</button>
+                                                    <button class="btn btn-success" (click)="editClaim(claim)"
+                                                        (click)="modal.close('Save click')">Validate</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </ng-template>
+                                    <button type="button" class="btn btn-outline-danger"
+                                        (click)="deleteClaim(claim.claim_id)">delete</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

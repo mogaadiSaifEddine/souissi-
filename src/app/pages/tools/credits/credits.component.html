@@ -1,0 +1,248 @@
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New credit</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div>
+        <div class="form-group">
+          <label class="control-label">Amount Credit : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="nameBank"
+            [(ngModel)]="credit.amountCredit"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Amount Remaining Credit : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="descriptionBank"
+            [(ngModel)]="credit.amountRemainingCredit"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Start Date : </label>
+          <input
+            class="form-control"
+            type="date"
+            name="Adress"
+            [(ngModel)]="credit.startDate"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Last Due Date : </label>
+          <input
+            name="tmm"
+            class="form-control"
+            type="date"
+            [(ngModel)]="credit.lastDueDate"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="saveCredit()">
+      Save
+    </button>
+  </div>
+</ng-template>
+<ng-template #content2 let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New credit</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div>
+        <div class="form-group">
+          <label class="control-label">Amount Credit : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="nameBank"
+            [(ngModel)]="credit.amountCredit"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Amount Remaining Credit : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="descriptionBank"
+            [(ngModel)]="credit.amountRemainingCredit"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Start Date : </label>
+          <input
+            class="form-control"
+            type="date"
+            name="Adress"
+            [(ngModel)]="credit.startDate"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Last Due Date : </label>
+          <input
+            name="tmm"
+            class="form-control"
+            type="date"
+            [(ngModel)]="credit.lastDueDate"
+          />
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="updateCredit()">
+      Update
+    </button>
+  </div>
+</ng-template>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Credits List</h2>
+  </div>
+
+  <div class="row mb-1">
+    <div class="col">
+      <div class="input-group-append mb-3 box-shadow">
+        <div class="input-group-append">
+          <span
+            (click)="open(content)"
+            class="input-group-text border-top-0 border-right-0 border-bottom-0"
+            ><i class="fa fa-plus"></i
+          ></span>
+        </div>
+        <input
+          type="text"
+          placeholder="Search Credit..."
+          class="form-control border-0"
+          (keyup)="updateFilter($event)"
+        />
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="panel-body">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Amount Credit</th>
+          <th>Amount Remaining Credit</th>
+          <th>start Date</th>
+          <th>Last Due Date</th>
+          <th *ngIf="userRole === 'Employee'">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let c of cr">
+          <td>{{ c.amountCredit }}</td>
+          <td>{{ c.amountRemainingCredit }}</td>
+          <td>{{ c.startDate }}</td>
+          <td>{{ c.lastDueDate }}</td>
+          <td *ngIf="userRole === 'Employee'" class="align-middle">
+            <div class="btn-group" role="group">
+              <button
+                class="btn btn-secondary btn-sm"
+                (click)="open2(content2, c)"
+              >
+                <i class="fa fa-pencil"></i>
+              </button>
+              <button
+                class="btn btn-secondary btn-sm"
+                (click)="deleteCredit(c.idCredit)"
+              >
+                <i class="fa fa-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div> -->
+
+  <ngx-datatable
+    #table
+    class="material"
+    [headerHeight]="40"
+    [limit]="10"
+    [columnMode]="'force'"
+    [footerHeight]="50"
+    [rowHeight]="'auto'"
+    [rows]="cr"
+    [selectionType]="'checkbox'"
+  >
+    <ngx-datatable-column
+      [width]="30"
+      [sortable]="false"
+      [canAutoResize]="false"
+      [draggable]="true"
+      [resizeable]="false"
+      [headerCheckboxable]="false"
+      [checkboxable]="false"
+    >
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Amount Credit">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Amount Remaining Credit">
+      <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
+        <span title="Double click to edit">
+          {{ value }}
+        </span>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Start Date">
+      <ng-template ngx-datatable-cell-template let-value="value">
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Last Due Date">
+      <ng-template ngx-datatable-cell-template let-value="value">
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column *ngIf="userRole === 'Employee'" name="Actions">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        <td class="align-middle">
+          <div class="btn-group" role="group">
+            <button
+              class="btn btn-secondary btn-sm"
+              (click)="open2(content2, row)"
+            >
+              <i class="fa fa-pencil"></i>
+            </button>
+            <button
+              class="btn btn-secondary btn-sm"
+              (click)="deleteCredit(row.idCredit)"
+            >
+              <i class="fa fa-trash"></i>
+            </button>
+          </div>
+        </td>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
