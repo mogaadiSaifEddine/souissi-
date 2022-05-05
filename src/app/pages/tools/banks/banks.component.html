@@ -166,58 +166,6 @@
     </div>
   </div>
 
-  <div class="table-responsive bg-white box-shadow">
-    <table class="table">
-      <thead class="thead-light">
-        <tr>
-          <th>Nom</th>
-          <th>Description</th>
-          <th>Adresse</th>
-          <th>Taux Moyen Du Marche</th>
-          <th>Marge Interet Bank</th>
-
-          <th *ngIf="userRole === 'Employee'">action</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let c of bk" class="col-xl-4 col-lg-6 mb-4">
-          <td>{{ c.nameBank }}</td>
-          <td>{{ c.descriptionBank }}</td>
-          <td>{{ c.adresseBank }}</td>
-          <td>{{ c.tauxMoyenDuMarche }}</td>
-          <td>{{ c.margeInteretBank }}</td>
-          <td *ngIf="userRole === 'Employee'" class="align-middle">
-            <div class="btn-group" role="group">
-              <button
-                class="btn btn-secondary btn-sm"
-                (click)="open2(content2, c)"
-              >
-                <i class="fa fa-pencil"></i>
-              </button>
-              <button
-                class="btn btn-secondary btn-sm"
-                (click)="deleteBank(c.idBank)"
-              >
-                <i class="fa fa-trash"></i>
-              </button>
-            </div>
-          </td>
-          <!-- <td>
-            <button (click)="deleteBank(c.idBank)" class="btn btn-danger">
-              Delete
-            </button>
-            <button
-              style="margin-left: 20px"
-              class="btn btn-success"
-              (click)="open2(content2, c)"
-            >
-              Update
-            </button>
-          </td> -->
-        </tr>
-      </tbody>
-    </table>
-  </div>
   <ngx-datatable
     #table
     class="material"
@@ -239,24 +187,29 @@
       [checkboxable]="false"
     >
     </ngx-datatable-column>
-    <ngx-datatable-column name="Name">
+    <ngx-datatable-column name="nameBank">
       <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
         {{ value }}
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Amount Remaining Credit">
+    <ngx-datatable-column name="descriptionBank">
       <ng-template ngx-datatable-cell-template let-row="row" let-value="value">
         <span title="Double click to edit">
           {{ value }}
         </span>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Start Date">
+    <ngx-datatable-column name="Adresse Bank">
       <ng-template ngx-datatable-cell-template let-value="value">
         {{ value }}
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column name="Last Due Date">
+    <ngx-datatable-column name="Taux Moyen Du Marche">
+      <ng-template ngx-datatable-cell-template let-value="value">
+        {{ value }}
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column name="Marge Interet Bank">
       <ng-template ngx-datatable-cell-template let-value="value">
         {{ value }}
       </ng-template>

@@ -10,11 +10,12 @@ import { BanksComponent } from "./banks/banks.component";
 import { AgentsComponent } from "./agents/agents.component";
 import { LoanSimulationsComponent } from "./loan-simulations/loan-simulations.component";
 import { CreditsComponent } from "./credits/credits.component";
-import { TransactionsComponent } from "../credits/transactions/transactions.component";
+import { TransactionsComponent } from "../tools/transactions/transactions.component";
 import {
   DatatableComponent,
   NgxDatatableModule,
 } from "@swimlane/ngx-datatable";
+import { NgxChartsModule } from "@swimlane/ngx-charts";
 
 export const routes = [
   { path: "", redirectTo: "banks", pathMatch: "full" },
@@ -35,6 +36,7 @@ export const routes = [
     ResizableModule,
     DirectivesModule,
     NgxDatatableModule,
+    NgxChartsModule,
   ],
   declarations: [
     BanksComponent,

@@ -3,36 +3,34 @@ import { CustomerAccount } from "./customer-account";
 import { StatutLoanSimulation } from "./statut-loan-simulation";
 
 export class LoanSimulation {
-    
-    idLoan!:number;
-	
-	taux!:number;
-	
-	mensuel!:number;
+  idLoan!: number;
 
-	capaciteDeRemboursement!:number;
-	
-	interet!:number;
-	
-	interetTotale!:number;
-	
-	mensualite!:number;
-	
-	principale!:number;
-	
-	montantRembourse!:number;
-	
-	prixImmob!:number;
-	
-	salaire!:number;
-	
-	dateStartSimulation!:Date;
-	
-	statusLoanSimulation!:StatutLoanSimulation;
+  taux!: number;
 
-	bankLoan!:Bank;
+  mensuel!: number;
 
-	customerAccountLoan!:CustomerAccount;
-	
-	
+  capaciteDeRemboursement!: number;
+
+  interet!: number;
+
+  interetTotale!: number;
+
+  mensualite!: number;
+
+  principale!: number;
+
+  montantRembourse!: number;
+
+  prixImmob!: number;
+
+  salaire!: number;
+
+  dateStartSimulation!: Date;
+
+  statusLoanSimulation!: StatutLoanSimulation;
+
+  bankLoan!: Bank;
+
+  customerAccountLoan!: CustomerAccount;
+  activ: number | boolean;
 }

@@ -12,6 +12,17 @@ export const menuItemsEmployee = [
     false,
     6
   ),
+  new Menu(
+    14,
+    "Our loansimulations",
+    "/tools/loansimulations",
+    null,
+    "warning",
+    null,
+    false,
+    6
+  ),
+
   new Menu(12, "Offers", "/offers", null, "gift", null, false, 0),
   new Menu(13, "Claims", "/claims", null, "file-text-o", null, false, 0),
   new Menu(2, "Chat", "/chats", null, "comments", null, false, 0),
@@ -39,6 +50,16 @@ export const menuItemsCustomer = [
   new Menu(5, "Sinisters", "/sinisters", null, "warning", null, false, 0),
   new Menu(6, "credits", null, null, "euro", null, true, 0),
   new Menu(7, "My Banks", "/tools/banks", null, "warning", null, false, 6),
+  new Menu(
+    14,
+    "My loansimulations",
+    "/tools/loansimulations",
+    null,
+    "warning",
+    null,
+    false,
+    6
+  ),
   new Menu(
     10,
     "My Credits",

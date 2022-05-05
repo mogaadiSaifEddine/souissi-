@@ -138,11 +138,14 @@ export class CreditsComponent implements OnInit {
     console.log(id);
     if (confirm("Are you sure you want to close this credit?"))
       this.creditService.closeCredit(id).subscribe(
-        (data) => {
-          this.getAllCredits();
-        },
+        (data) => {},
         (err) => {
-          console.log(err.error.text);
+          if (err.error.text !== "Unpaid Credit") {
+            this.toastr.error("Error closing credit");
+          } else {
+            this.getAllCredits();
+            this.toastr.success("Credit closed successfully");
+          }
         }
       );
   }

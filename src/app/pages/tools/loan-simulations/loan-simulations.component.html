@@ -1,1 +1,218 @@
-<p>loan-simulations works!</p>
+<ng-template #content let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New Loan Simulation</h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss('Cross click')"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div>
+        <div class="form-group">
+          <label class="control-label">Number of years : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="firstname"
+            [(ngModel)]="nbrAnnee"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Salary : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="lastname"
+            [(ngModel)]="salaire"
+          />
+        </div>
+        <div class="form-group">
+          <label class="control-label">Offer ID : </label>
+          <input
+            class="form-control"
+            type="text"
+            name="lastname"
+            [(ngModel)]="ofID"
+          />
+        </div>
+
+        <label for="bank-select">Choose a BANK:</label>
+
+        <div class="form-group">
+          <select #selected class="form-control">
+            <option
+              *ngFor="let c of bk"
+              #Origin
+              [(ngModel)]="bk"
+              value="{{ c.nameBank }}"
+            >
+              {{ c.nameBank }}
+            </option>
+          </select>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-outline-dark"
+      (click)="saveLoanSimulation(selected.value, nbrAnnee, salaire, ofID)"
+    >
+      Save
+    </button>
+  </div>
+</ng-template>
+<div class="panel panel-primary">
+  <div class="panel-heading">
+    <h2>Loan Simulation List</h2>
+  </div>
+  <div *ngIf="userRole === 'Customer'" class="border">
+    <button
+      class="btn btn-md btn-outline-primary"
+      (click)="open(content, true)"
+    >
+      <i class="fa fa-user"></i>Simulate
+    </button>
+  </div>
+  <div *ngIf="userRole === 'Customer'" class="border">
+    <button
+      class="btn btn-md btn-outline-primary"
+      (click)="open(content, false)"
+    >
+      <i class="fa fa-user"></i>New LoanSimulation
+    </button>
+  </div>
+
+  <div class="row mb-1">
+    <div class="col">
+      <div class="input-group mb-3 box-shadow">
+        <div class="input-group-prepend">
+          <span
+            class="input-group-text border-top-0 border-left-0 border-bottom-0"
+            ><i class="fa fa-search"></i
+          ></span>
+        </div>
+        <input
+          type="text"
+          [(ngModel)]="searchText"
+          placeholder="Search Simulation by taux..."
+          class="form-control border-0"
+        />
+        <div class="input-group-append">
+          <span
+            (click)="toggle('list')"
+            class="input-group-text border-top-0 border-right-0 border-bottom-0"
+            ><i class="fa fa-list"></i
+          ></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body">
+    <div class="panel-body">
+      <ngx-datatable
+        #table
+        class="material"
+        [headerHeight]="40"
+        [limit]="10"
+        [columnMode]="'force'"
+        [footerHeight]="50"
+        [rowHeight]="'auto'"
+        [rows]="ls"
+        [selectionType]="'checkbox'"
+      >
+        <ngx-datatable-column
+          [width]="30"
+          [sortable]="false"
+          [canAutoResize]="false"
+          [draggable]="true"
+          [resizeable]="false"
+          [headerCheckboxable]="false"
+          [checkboxable]="false"
+        >
+        </ngx-datatable-column>
+        <ngx-datatable-column name="taux">
+          <ng-template
+            ngx-datatable-cell-template
+            let-value="value"
+            let-row="row"
+          >
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="mensuel">
+          <ng-template
+            ngx-datatable-cell-template
+            let-row="row"
+            let-value="value"
+          >
+            <span title="Double click to edit">
+              {{ value }}
+            </span>
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="capacite De Remboursement">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="interet">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="principale">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="montant Rembourse">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="interetTotale">
+          <ng-template ngx-datatable-cell-template let-value="value">
+            {{ value }}
+          </ng-template>
+        </ngx-datatable-column>
+
+        <ngx-datatable-column *ngIf="userRole === 'Employee'" name="Actions">
+          <ng-template
+            ngx-datatable-cell-template
+            let-value="value"
+            let-row="row"
+          >
+            <td class="align-middle">
+              <div class="btn-group" role="group">
+                <button (click)="deleteLoanSimulation(row.idLoan)">
+                  <i class="fa fa-trash"></i>
+                </button>
+              </div>
+            </td>
+            <td class="align-middle">
+              <div class="btn-group" role="group">
+                <button (click)="confirmSimulation(row.idLoan)">
+                  <i class="fa fa-thumbs-o-up"></i>
+                </button>
+              </div>
+            </td>
+            <td class="align-middle">
+              <div class="btn-group" role="group">
+                <button (click)="unconfirmSimulation(row.idLoan)">
+                  <i class="fa fa-thumbs-o-down"></i>
+                </button>
+              </div>
+            </td>
+          </ng-template>
+        </ngx-datatable-column>
+      </ngx-datatable>
+    </div>
+  </div>
+</div>
